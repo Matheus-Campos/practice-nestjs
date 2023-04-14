@@ -15,4 +15,8 @@ export class VaccineService {
   registerVaccine(name: string): Promise<Vaccine> {
     return this.vaccineRepository.save({ name });
   }
+
+  getVaccineById(id: number): Promise<Vaccine> {
+    return this.vaccineRepository.findOneByOrFail({ id });
+  }
 }
