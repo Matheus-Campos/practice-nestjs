@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { Vaccine } from '../entities/vaccine.entity';
 import { VaccineService } from '../services';
 
@@ -19,5 +27,18 @@ export class VaccineController {
   @Get(':id')
   getById(@Param('id') id: string): Promise<Vaccine> {
     return this.vaccineService.getVaccineById(Number(id));
+  }
+
+  @Patch(':id/quantity')
+  addQuantity(
+    @Param('id') vaccineId: string,
+    @Body('newQuantity') newQuantity: number,
+  ): Promise<Vaccine> {
+    return this.vaccineService.addQuantity(Number(vaccineId), newQuantity);
+  }
+
+  @Delete(':id')
+  deleteById(@Param('id') vaccineId: string): Promise<void> {
+    return this.vaccineService.deleteVaccineById(Number(vaccineId));
   }
 }
