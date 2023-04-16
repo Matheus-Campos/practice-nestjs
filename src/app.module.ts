@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { VaccineModule } from './vaccine/vaccine.module';
 
 @Module({
-  imports: [VaccineModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), VaccineModule],
 })
 export class AppModule {}
